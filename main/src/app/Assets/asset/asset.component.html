@@ -1,0 +1,57 @@
+<!-- <div fxLayout="row wrap">
+    <div fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                
+                <div fxLayout="row wrap" class="align-items-center">
+                    <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex="100">
+                    <mat-form-field>
+                      <mat-label>Search</mat-label>
+                      <input matInput (keyup)="applyFilter($event)">
+                    </mat-form-field>
+                  </div>
+                    <div fxFlex.gt-md="75" class="text-right">
+                        <button mat-raised-button (click)="openDialog('Add',{})" color="primary">Add Asset</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div> -->
+
+<mat-card class="course-app">
+    <mat-card-content>
+      <div fxLayout="row wrap" class="align-items-center course-filters">
+        <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex="100">
+          <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+        </div>
+        <div fxFlex.gt-md="50" fxFlex.gt-lg="50" fxFlex="100"></div>
+        <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex="100">
+          <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select required  (selectionChange)="ddlChange($event)">
+              <mat-option value="All" selected>All</mat-option>
+              
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+<div fxLayout="row wrap">
+<div fxFlex.gt-sm="33.33%" fxFlex="100" *ngFor="let asset of assets " >
+    <mat-card>
+        <mat-card-header class="bg-info text-white">
+            <mat-card-title >  <a   routerLink="/assets/{{asset.id}}" > {{ asset.name}} </a></mat-card-title>
+            <mat-card-subtitle>Click to see asset details </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ asset.token}} </p>
+        </mat-card-content>
+    </mat-card>
+</div>
+</div>
