@@ -25,7 +25,25 @@
             </div>
             
             
-            
+            <div fxFlex="100" >
+                <div class="m-r-15 m-l-15">
+                    <mat-form-field>
+                       <!-- <mat-label> assetId </mat-label>
+                                <mat-select *[formControl]="assControl" required>
+                                    <mat-option *ngFor="let ass of asset" [value]="ass">
+                                        {{ass.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="assControl.hasError('required')">Please choose </mat-error>
+                                    <mat-hint>{{assControl.value?.sound}}</mat-hint> -->
+                       
+                       <input type="text" matInput required id="assetId" name="assetId" [(ngModel)]="local_data.assetId"
+                            placeholder="assetId"> 
+                    </mat-form-field>
+                </div>
+
+            </div>
+             
             
         </div>
         <button mat-button (click)="doAction()" mat-flat-button color="warn"

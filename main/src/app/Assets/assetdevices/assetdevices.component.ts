@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DevicesService } from 'src/app/Devices/device.service';
 import { Asset } from 'src/app/models/asset';
@@ -32,7 +32,7 @@ export class AssetdevicesComponent implements OnInit {
   @ViewChild(MatSort) sort !: MatSort;
 
   searchText: any;
-  displayedColumns: any[] = ['#', 'Name', 'Token', 'action'];
+  displayedColumns: any[] = ['#', 'Name', 'Token', 'assetId', 'action'];
   dataSource !: MatTableDataSource<any>;
 
   deviceForm !: FormGroup
@@ -41,7 +41,7 @@ export class AssetdevicesComponent implements OnInit {
     private assetService: AssetService,
     private activatedRoute: ActivatedRoute,
     private deviceService: DevicesService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,private router: Router
 
 
   ) { }
@@ -67,28 +67,28 @@ export class AssetdevicesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.event === 'Add') {
-        this.addDevice();
+        this.addDevice(result.data);
+        this.reloadCurrentPage();
       } else if (result.event === 'Update') {
         this.updateDevice(result.data);
+        this.reloadCurrentPage();
       } else if (result.event === 'Delete') {
         this.deleteDevice(result.data);
+        this.reloadCurrentPage();
       } 
     });
   }
 
-  addDevice() {
-    this.deviceService.add(this.deviceForm.value)
+  addDevice(row_obj: any) {
+    this.deviceService.add(row_obj)
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.deviceForm.reset;
-
+          
         },
         error: (e) => console.error(e)
       });
-    //this.dialog.open(AddComponent);
-    //this.sort.renderRows();
-
+   
   }
   
   updateDevice(row_obj: any) {
@@ -113,11 +113,7 @@ export class AssetdevicesComponent implements OnInit {
     });
   }
 
-  
-
-
-
-  ngAfterViewInit(): void {
+   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
@@ -143,6 +139,12 @@ export class AssetdevicesComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  reloadCurrentPage(){
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigate([currentUrl]);
+    });
+  }
 
 }
 

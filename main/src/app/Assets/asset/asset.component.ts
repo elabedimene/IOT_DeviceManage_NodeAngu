@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, OnInit,Input, Optional } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Asset } from 'src/app/models/asset';
@@ -11,11 +11,12 @@ import { AssetService } from '../asset.service';
   styleUrls: ['./asset.component.scss']
 })
 export class AssetComponent implements OnInit {
-  assets: Asset[] = [];
+ assets: Asset[] = [];
   constructor(private dialog: MatDialog,
     private AssetService: AssetService,
     private router: Router) { }
 
+    
   ngOnInit(): void {
     this.getAllAssets()
   }

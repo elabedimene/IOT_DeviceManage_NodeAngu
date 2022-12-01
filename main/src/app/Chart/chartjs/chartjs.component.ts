@@ -12,7 +12,7 @@ export class ChartjsComponent implements OnInit {
 
   constructor() {
     this.subtitle = 'This is chart page.';
-    console.log("teleeeeeeeeem" , this.telemetries);
+   
     
     
   }
@@ -42,7 +42,7 @@ export class ChartjsComponent implements OnInit {
 
   public barChartData: any[] = [
     { data: [0, 0, 0, 0, 0, 0, 0, 0 ,19, 86, 27, 90 ], label: 'Tempetaure' },
-    { data: [0, 0, 0, 0, 0, 0, 0, 0 ,28, 48, 40, 19, ], label: 'Pression ' }
+    
   ];
   public barChartColors: Array<any> = [
     { backgroundColor: '#1976d2' },

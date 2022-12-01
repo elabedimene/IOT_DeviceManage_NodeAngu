@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AssetService } from 'src/app/Assets/asset.service';
 import { DialogContentComponent } from 'src/app/Assets/dialog-content/dialog-content.component';
@@ -28,19 +28,20 @@ export class DevicesComponent implements OnInit {
   @ViewChild(MatSort) sort !: MatSort;
 
   searchText: any;
-  displayedColumns: any[] = ['#', 'Name', 'Token', 'action'];
+  displayedColumns: any[] = ['#', 'Name', 'Token', 'assetId', 'action'];
   dataSource !: MatTableDataSource<any>;
   constructor(public dialog: MatDialog,
     public datePipe: DatePipe,
     private assetService: AssetService,
     private activatedRoute: ActivatedRoute,
-    private deviceService: DevicesService
-  ) { }
+    private deviceService: DevicesService,
+    private router: Router  ) { }
 
 
 
   ngOnInit(): void {
     this.getAllDevices()
+   
     
 
   }
@@ -76,31 +77,30 @@ export class DevicesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.event === 'Add') {
-        //this.addDevice();
+        this.addDevice(result.data);
+        this.reloadCurrentPage();
       } else if (result.event === 'Update') {
         this.updateDevice(result.data);
+        this.reloadCurrentPage();
       } else if (result.event === 'Delete') {
         this.deleteDevice(result.data);
-      } /* else if (result.event === 'info') {
-        this.ShowTelemetries(result.data);
-      } */
+        this.reloadCurrentPage();
+      } 
     });
   }
 
-  /* addDevice() {
-    this.deviceService.add(this.deviceForm.value)
+  addDevice(row_obj: any) {
+    this.deviceService.add(row_obj)
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.deviceForm.reset;
+         
 
         },
         error: (e) => console.error(e)
       });
-    //this.dialog.open(AddComponent);
-    //this.sort.renderRows();
-
-  } */
+   
+  } 
   
   updateDevice(row_obj: any) {
     this.deviceService.put(row_obj, row_obj.id)
@@ -121,6 +121,14 @@ export class DevicesComponent implements OnInit {
 
       },
       error: (e) => console.error(e)
+    });
+  }
+
+
+  reloadCurrentPage(){
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigate([currentUrl]);
     });
   }
 }

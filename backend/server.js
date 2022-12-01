@@ -59,38 +59,6 @@ m.mqttService();
 
 
 
-/* for (let d of data.asset.devices){
-    const ddata ={
-      id : d.id,
-      name : d.name , 
-      assetId : data.asset.id
-    }
-    console.log(d); */
-//device.create(ddata) ;
-
-
-/* res = Object.values(d).flatMap((item) => {
-  const SS = item.telems
-  console.log("device.telems " , SS);
-  for (let t of SS){
-      const tdata ={
-      id : t.id,
-      name : t.name , 
-      deviceId : d.id
-    }
-    telem.create(tdata)
-
-  }
-  
-}, []);  */
-
-
-
-
-
-
-
-
 
 
 

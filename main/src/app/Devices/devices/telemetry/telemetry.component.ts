@@ -34,8 +34,7 @@ export class TelemetryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log("dataaaa" , this.data.id);
-   //this.getDevicesTelem(this.data.id );
+   
    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
     this.deviceid = params['id'];
     this.getDevicesTelem(this.deviceid);
@@ -56,12 +55,9 @@ export class TelemetryComponent implements OnInit {
     .subscribe({
       next:(res) => {
         this.devices = res ; 
-        console.log("reeeeesss" , res);
-        //this.device = res.devices ; 
-        console.log("res devicess telem" , res.telems);
-        this.telems = res.telems ; 
+       this.telems = res.telems ; 
         
-        console.log("res devicess telem  id " , res.telems[0].id);
+       
        
        }
     })  

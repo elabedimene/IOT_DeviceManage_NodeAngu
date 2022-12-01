@@ -46,7 +46,10 @@
                 <td mat-cell *matCellDef="let device"> {{device.token}} </td>
               </ng-container>
   
-             
+              <ng-container matColumnDef="assetId">
+                <th mat-header-cell *matHeaderCellDef> assetId </th>
+                <td mat-cell *matCellDef="let device"> {{device.assetId}} </td>
+              </ng-container>
   
               
   

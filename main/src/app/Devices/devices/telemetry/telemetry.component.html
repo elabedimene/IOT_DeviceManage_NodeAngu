@@ -10,7 +10,7 @@
                 </div>
                 <div fxFlex.gt-md="75" class="text-right">
                     <a >
-                        <button mat-stroked-button color="primary" class="m-r-10" routerLink="/devices">Back to Devices</button>
+                        <button mat-stroked-button color="primary" class="m-r-10" routerLink="..">Show Devices</button>
                     </a>
                     
                 </div>
@@ -24,68 +24,36 @@
                 <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex="100">
                     <span class="font-medium">
                         <h5 class="m-b-10 font-medium" >Telemetries' details </h5>                    </span>
-                    <h6 class="m-t-5 m-b-0"></h6>
+                   
                 </div>
                 <div fxFlex.gt-md="75" class="text-right">
                     <span class="font-medium">
                         
+
+                        <div fxFlex.gt-md="50" fxFlex.gt-lg="50" fxFlex="100"  >
+                        <div *ngFor="let telem of telems" >
+                            <h6 class="m-t-0 m-b-5"> name : {{telem.name}}</h6>
+                            <h6 class="m-t-0 m-b-5"> Token : {{telem.token}}</h6>
+                            <h6 class="m-t-0 m-b-5"> value : {{telem.value}}</h6>
+                            <h6 class="m-t-0 m-b-5"> Time : {{telem.timestamp }}</h6>
+                           
+                           </div>
+                        </div>
+
                     </span>
-                    <h6 class="m-t-5 m-b-0" ></h6>
+                   
                 </div>
             </div>
             <hr />
             
             
 
-                <app-chartjs [telemetries]="telems"> </app-chartjs>
+                          
                
-               
-                <!-- > <div fxFlex.gt-md="50" fxFlex.gt-lg="50" fxFlex="100" 
-                    
-                    >
-                    
-                    <h6 class="m-t-0 m-b-5"> name : {{t.name}}</h6>
-                    <h6 class="m-t-0 m-b-5">value : {{t.value  }}</h6>
-                    <h6 class="m-t-0 m-b-5">Date : {{t.timestamp | date:'dd/MM/yyyy' }}</h6>
-                   
-                   
-                </div>
--->
-               
-               
-
-
-                <!-- <div fxFlex.gt-md="50" fxFlex.gt-lg="50" fxFlex="100" class="text-right">
-                    <h4 class="m-b-10 font-medium">Bill To</h4>
-                    <h6 class="m-t-0 m-b-5">
-                        
-                    </h6>
-                    <h6 class="m-t-0 m-b-5">
-                        
-                    </h6>
-                    <h6 class="m-t-0 m-b-5">
-                        
-                    </h6>
-                    <h6 class="m-t-0 m-b-5">
-                    </h6>
-                </div> -->
-            
-
-
-           
              
-                
-          
 
-
-            <!-- <div class="text-right m-t-30">
-                <h5 class="m-b-5 font-medium"> </h5>
-                <span class="font-medium"></span>
-                <h3 class="m-b-0 b-t p-t-20"> </h3>
-            </div> -->
+       
 
           
-</div>
-        </span>
-   </mat-card-content>
-</mat-card>  
+</div></span></mat-card-content></mat-card>
+       
