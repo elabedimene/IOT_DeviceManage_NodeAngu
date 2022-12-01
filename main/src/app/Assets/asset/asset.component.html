@@ -37,6 +37,9 @@
         <mat-card-content>
             <p>Toeken : {{ asset.token}} </p>
             <p>Id {{ asset.id}} </p>
+            <a (click)="openDialog('Delete',asset)" class="m-r-10 cursor-pointer">
+              <i class="fa fa-trash text-danger"></i>
+            </a>
         </mat-card-content>
     </mat-card>
 </div>
