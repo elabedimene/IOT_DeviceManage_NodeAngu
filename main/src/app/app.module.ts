@@ -36,6 +36,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TelemetryComponent } from './Devices/devices/telemetry/telemetry.component';
 import { ChartjsComponent } from './Chart/chartjs/chartjs.component';
+import { DialogAssetContentComponent } from './Assets/dialog-asset-content/dialog-asset-content.component';
 
 
 
@@ -62,6 +63,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         AppBreadcrumbComponent,
         HorizontalAppHeaderComponent,
         HorizontalAppSidebarComponent,
+        DialogAssetContentComponent,
        
         
         

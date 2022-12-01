@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { Asset } from 'src/app/models/asset';
 import { AssetService } from '../asset.service';
+import { DialogAssetContentComponent } from '../dialog-asset-content/dialog-asset-content.component';
 
 @Component({
   selector: 'app-asset',
@@ -30,21 +31,7 @@ export class AssetComponent implements OnInit {
 
   }
 
-  openDialog(action: string, obj: any): void {
-    /* obj.action = action;
-    const dialogRef = this.dialog.open(EmployeeDialogContent, {
-        data: obj
-    });
-    dialogRef.afterClosed().subscribe(result => {
-        if (result.event === 'Add') {
-            this.addRowData(result.data);
-        } else if (result.event === 'Update') {
-            this.updateRowData(result.data);
-        } else if (result.event === 'Delete') {
-            this.deleteRowData(result.data);
-        }
-    }); */
-}
+ 
 
   applyFilter(event: Event): void {
      const filterValue = (event.target as HTMLInputElement).value;
@@ -61,12 +48,54 @@ export class AssetComponent implements OnInit {
         this.getAllAssets()
     }
   }
- /*  ShowDevices(id: any): void {
-    this.router.navigate(['assets', id]);
-  } */
 
 
+  openDialog(action: string, obj: any): void {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogAssetContentComponent, {
+      data: obj
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event === 'Add') {
+        this.addAsset(result.data);
+        this.reloadCurrentPage();
+      } else if (result.event === 'Delete') {
+        this.deleteDevice(result.data);
+        this.reloadCurrentPage();
+      } 
+    });
+  }
 
+  addAsset(row_obj: any) {
+    this.AssetService.add(row_obj)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+                 },
+        error: (e) => console.error(e)
+      });
+   
+  } 
+  
+ 
+  deleteDevice(row_obj: any) {
+    this.AssetService.delete(row_obj.id)
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+
+  reloadCurrentPage(){
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigate([currentUrl]);
+    });
+  }
 
 
 
